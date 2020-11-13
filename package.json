@@ -1,0 +1,18 @@
+{
+  "name": "turisme-en-dades-etl",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "eaguado@fundaciobit.org",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "moment": "^2.29.1",
+    "xlsx": "^0.16.8",
+    "yargs": "^16.1.0"
+  }
+}

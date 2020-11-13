@@ -1,7 +1,8 @@
 const XLSX = require("xlsx");
 
-const Turistas = require('./sheets/Turistes');
-const Ocupacio = require('./sheets/Ocupacio');
+const Turistas = require('./sheets/turistes');
+const Ocupacio = require('./sheets/ocupacio');
+const Aeri = require('./sheets/aeri');
 
 const excelToJson = (inputFile) => {
     const excel = XLSX.readFile(inputFile);
@@ -10,6 +11,7 @@ const excelToJson = (inputFile) => {
     sheetNames.forEach (sheet => {
         switch (sheet) {
             case sections[0]:
+                console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
                 // Turistas.arribadaDeTuristes(datos);
                 // Turistas.arribadaDeTuristesAcc(datos);
@@ -23,22 +25,28 @@ const excelToJson = (inputFile) => {
                 // Turistas.pernoctacionsPerIllaAcc(datos);
                 break;
             case sections[1]:
-                console.log(sections[1])
+                console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                Ocupacio.ocupacioPerPlacesObertes(datos);
-                Ocupacio.ocupacioPerPlacesObertesAcc(datos);
+                // Ocupacio.ocupacioPerPlacesObertes(datos);
+                // Ocupacio.ocupacioPerPlacesObertesAcc(datos);
                 break;
             case sections[2]:
-                console.log(sections[2])
+                console.log(sheet)
+                var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
+                // Aeri.passatgers_aeris(datos);
+                Aeri.passatgers_aeris_acc(datos);
                 break;
             case sections[3]:
-                console.log(sections[3])
+                console.log(sheet)
+                var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
                 break;
             case sections[4]:
-                console.log(sections[4])
+                console.log(sheet)
+                var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
                 break;
             case sections[5]:
-                console.log(sections[5])
+                console.log(sheet)
+                var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
                 break;
             default:
                 console.log("Incorrect sheet");
