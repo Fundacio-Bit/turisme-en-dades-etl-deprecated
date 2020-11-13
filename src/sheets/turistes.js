@@ -3,16 +3,16 @@ const table = require('../json/sheets_json');
 const request = require('../utils/axios_requests')
 
 const arribadaDeTuristes = (data) => {
-    const init_row = table.rows['arribada_turistes']['initRow']
-    const num_rows = table.rows['arribada_turistes']['numRows']
+    const init_row = table.rows['tourist_arrivals']['initRow']
+    const num_rows = table.rows['tourist_arrivals']['numRows']
     var dataObj = generate_json.getDataSingleTable(data, init_row, num_rows);
     console.log(JSON.stringify(dataObj));
     request.makePost('http://54.77.111.120:5300', dataObj); 
 }
   
 const arribadaDeTuristesAcc = (data) => {
-    const init_row = table.rows['arribada_turistes_acc']['initRow']
-    const num_rows = table.rows['arribada_turistes_acc']['numRows']
+    const init_row = table.rows['tourist_arrivals_acc']['initRow']
+    const num_rows = table.rows['tourist_arrivals_acc']['numRows']
     var dataObj = generate_json.getDataSingleTable(data, init_row, num_rows);
     console.log(JSON.stringify(dataObj));
     request.makePost('http://54.77.111.120:5300', dataObj); 

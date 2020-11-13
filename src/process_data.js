@@ -3,6 +3,7 @@ const XLSX = require("xlsx");
 const Turistas = require('./sheets/turistes');
 const Ocupacio = require('./sheets/ocupacio');
 const Aeri = require('./sheets/aeri');
+const Maritim = require('./sheets/maritim');
 
 const excelToJson = (inputFile) => {
     const excel = XLSX.readFile(inputFile);
@@ -33,12 +34,20 @@ const excelToJson = (inputFile) => {
             case sections[2]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                // Aeri.passatgers_aeris(datos);
-                Aeri.passatgers_aeris_acc(datos);
+                // Aeri.air_passengers_arrivals(datos);
+                // Aeri.air_passengers_arrivals_acc(datos);
                 break;
             case sections[3]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
+                Maritim.cruisePassengersArrivalsAP(datos)
+                Maritim.cruisePassengersArrivalsP(datos)
+                Maritim.cruisePassengersArrivalsAccAP(datos)
+                Maritim.cruisePassengersArrivalsAccP(datos)
+                Maritim.seaPassengersArrivalsAP(datos)
+                Maritim.seaPassengersArrivalsP(datos)
+                Maritim.seaPassengersArrivalsAccAP(datos)
+                Maritim.seaPassengersArrivalsAccP(datos)
                 break;
             case sections[4]:
                 console.log(sheet)
@@ -50,7 +59,7 @@ const excelToJson = (inputFile) => {
                 break;
             default:
                 console.log("Incorrect sheet");
-
+                break;
       }
       
   })
