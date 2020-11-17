@@ -40,10 +40,10 @@ const excelToJson = (inputFile) => {
             case sections[3]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                Maritim.cruisePassengersArrivalsAP(datos)
-                Maritim.cruisePassengersArrivalsP(datos)
-                Maritim.cruisePassengersArrivalsAccAP(datos)
-                Maritim.cruisePassengersArrivalsAccP(datos)
+                // Maritim.cruisePassengersArrivalsAP(datos)
+                // Maritim.cruisePassengersArrivalsP(datos)
+                // Maritim.cruisePassengersArrivalsAccAP(datos)
+                // Maritim.cruisePassengersArrivalsAccP(datos)
                 Maritim.seaPassengersArrivalsAP(datos)
                 Maritim.seaPassengersArrivalsP(datos)
                 Maritim.seaPassengersArrivalsAccAP(datos)
