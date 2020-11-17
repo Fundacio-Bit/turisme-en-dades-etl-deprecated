@@ -34,28 +34,30 @@ const cruisePassengersArrivalsAccP = (data) => {
 const seaPassengersArrivalsAP = (data) => {
   const init_row = table.rows['sea_passengers_arrivals_autoritat_portuaria']['initRow']
   const num_rows = table.rows['sea_passengers_arrivals_autoritat_portuaria']['numRows']
-  var dataObj = generate_json.getDataSingleTable(data, init_row, num_rows);
+  var dataObj = generate_json.getDataSeaPassengersArrivalsAP(data, init_row, num_rows);
   request.makePost('http://54.77.111.120:5300', dataObj); 
 }
 
 const seaPassengersArrivalsP = (data) => {
   const init_row = table.rows['sea_passengers_arrivals_ports']['initRow']
   const num_rows = table.rows['sea_passengers_arrivals_ports']['numRows']
-  var dataObj = generate_json.getDataSingleTable(data, init_row, num_rows);
+  const title_row = table.rows['sea_passengers_arrivals_autoritat_portuaria']['initRow'];
+  var dataObj = generate_json.getDataSeaPassengersArrivalsP(data, init_row, num_rows, title_row);
   request.makePost('http://54.77.111.120:5300', dataObj); 
 }
 
 const seaPassengersArrivalsAccAP = (data) => {
   const init_row = table.rows['sea_passengers_arrivals_acc_autoritat_portuaria']['initRow']
   const num_rows = table.rows['sea_passengers_arrivals_acc_autoritat_portuaria']['numRows']
-  var dataObj = generate_json.getDataSingleTable(data, init_row, num_rows);
+  var dataObj = generate_json.getDataSeaPassengersArrivalsAP(data, init_row, num_rows);
   request.makePost('http://54.77.111.120:5300', dataObj); 
 }
 
 const seaPassengersArrivalsAccP = (data) => {
   const init_row = table.rows['sea_passengers_arrivals_acc_ports']['initRow']
   const num_rows = table.rows['sea_passengers_arrivals_acc_ports']['numRows']
-  var dataObj = generate_json.getDataSingleTable(data, init_row, num_rows);
+  const title_row = table.rows['sea_passengers_arrivals_acc_autoritat_portuaria']['initRow']
+  var dataObj = generate_json.getDataSeaPassengersArrivalsP(data, init_row, num_rows, title_row);
   request.makePost('http://54.77.111.120:5300', dataObj); 
 }
 

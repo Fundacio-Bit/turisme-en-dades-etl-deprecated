@@ -44,9 +44,9 @@ const excelToJson = (inputFile) => {
                 // Maritim.cruisePassengersArrivalsP(datos)
                 // Maritim.cruisePassengersArrivalsAccAP(datos)
                 // Maritim.cruisePassengersArrivalsAccP(datos)
-                Maritim.seaPassengersArrivalsAP(datos)
-                Maritim.seaPassengersArrivalsP(datos)
-                Maritim.seaPassengersArrivalsAccAP(datos)
+                // Maritim.seaPassengersArrivalsAP(datos)
+                // Maritim.seaPassengersArrivalsP(datos)
+                // Maritim.seaPassengersArrivalsAccAP(datos)
                 Maritim.seaPassengersArrivalsAccP(datos)
                 break;
             case sections[4]:

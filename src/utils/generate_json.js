@@ -81,6 +81,93 @@ const getDataDoubleTable = (data, init_row, num_rows, title_row) => {
  * @param {number} init_row 
  * @param {number} num_rows 
  */
+const getDataSeaPassengersArrivalsAP = (data, init_row, num_rows) => {
+    var title =  Object.values(data[init_row])[0] + ' - '  + Object.values(data[init_row + 2])[0];
+    var columns = [];
+    Object.values(data[init_row + 1]).forEach(item => columns.push({'ca':item}))
+    var rows = [];
+    var from_row = init_row + 2;
+    var to_row = from_row+ num_rows
+    for (let i = from_row; i < to_row; i++) {
+        let all_values =[];
+        if (i === from_row) {
+            Object.values(data[i]).slice(1).forEach(item => 
+                isFinite(item) 
+                    ? all_values.push((item).toString())
+                    : all_values.push((item))
+            )
+            let values = all_values.shift();
+            rows.push({'name': {'ca': Object.values(data[i])[1]}, 'values':all_values})
+        } else {
+            Object.values(data[i]).forEach(item => 
+                isFinite(item) 
+                    ? all_values.push((item).toString())
+                    : all_values.push((item))
+            )
+            let values = all_values.shift();
+            rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
+        }
+    }
+    var dataObj = 
+        {
+        "title": {
+            "ca": title
+        },
+        "columns": columns,
+        "rows": rows
+    }
+    return dataObj;
+}
+
+/**
+ * 
+ * @param {Object} data 
+ * @param {number} init_row 
+ * @param {number} num_rows 
+ */
+const getDataSeaPassengersArrivalsP = (data, init_row, num_rows, title_row) => {
+    var title =  Object.values(data[title_row])[0] + ' - '  + Object.values(data[init_row])[0];
+    var columns = [];
+    Object.values(data[title_row + 1]).forEach(item => columns.push({'ca':item}))
+    var rows = [];
+    var to_row = init_row+ num_rows
+    for (let i = init_row; i < to_row; i++) {
+        let all_values =[];
+        if (i === init_row) {
+            Object.values(data[i]).slice(1).forEach(item => 
+                isFinite(item) 
+                    ? all_values.push((item).toString())
+                    : all_values.push((item))
+            )
+            let values = all_values.shift();
+            rows.push({'name': {'ca': Object.values(data[i])[1]}, 'values':all_values})
+        } else {
+            Object.values(data[i]).forEach(item => 
+                isFinite(item) 
+                    ? all_values.push((item).toString())
+                    : all_values.push((item))
+            )
+            let values = all_values.shift();
+            rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
+        }
+    }
+    var dataObj = 
+        {
+        "title": {
+            "ca": title
+        },
+        "columns": columns,
+        "rows": rows
+    }
+    return dataObj;
+}
+
+/**
+ * 
+ * @param {Object} data 
+ * @param {number} init_row 
+ * @param {number} num_rows 
+ */
 const getDataOcupacio = (data, init_row, num_rows) => {
     var title = Object.keys(data[init_row + 1])[0];
     var columns = [];
@@ -135,4 +222,5 @@ const getDataOcupacioAcc = (data, init_row, num_rows) => {
     return dataObj;
 }
 
-module.exports = { getDataSingleTable,getDataDoubleTable, getDataOcupacio, getDataOcupacioAcc }
+module.exports = { getDataSingleTable,getDataDoubleTable, getDataSeaPassengersArrivalsAP, 
+    getDataSeaPassengersArrivalsP, getDataOcupacio, getDataOcupacioAcc }

@@ -18,9 +18,9 @@ const rows =
     cruise_passengers_arrivals_acc_autoritat_portuaria:  { initRow: 16, numRows: 6 },
     cruise_passengers_arrivals_acc_ports:  { initRow: 22, numRows: 6 },
     sea_passengers_arrivals_autoritat_portuaria:  { initRow: 29, numRows: 6 },
-    sea_passengers_arrivals_ports:  { initRow: 29, numRows: 3 },
+    sea_passengers_arrivals_ports:  { initRow: 37, numRows: 3 },
     sea_passengers_arrivals_acc_autoritat_portuaria:  { initRow: 41, numRows: 6 },
-    sea_passengers_arrivals_acc_ports:  { initRow: 41, numRows: 3 },
+    sea_passengers_arrivals_acc_ports:  { initRow: 49, numRows: 3 },
 };
   
 module.exports = { rows };
