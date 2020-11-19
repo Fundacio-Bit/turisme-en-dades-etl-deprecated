@@ -1,27 +1,56 @@
 const fs = require('fs');
 const csv = require('fast-csv');
 
+const fs = require('fs');
+const csv = require('fast-csv');
+
 function readFiles(inputFilesPath, month) {
-  var monthString = month.split('-')[0] + 'M' + month.split('-')[1];
-  var previousMonthString = (month.split('-')[0] - 1) + 'M' + month.split('-')[1];
   const promises = inputFilesPath.map((path) => {
     console.log("Reading " + path);
     var brand = path.match(/_(.*?)_/)[1];
     return new Promise((resolve) => {
       var dataObj = {};
-      var dataArray = [];
       return csv
           .parseFile(path, {delimiter: ';', skipLines: 2})
           .on('data', function(data) {
-              dataObj = {
-                  "brand": brand,
-                  "data": data
+            if (data[0] === month) {
+                dataObj = {
+                    "title": {
+                      "ca": "Despesa dels turistes"
+                    },
+                    "columns": [
+                      {
+                        "ca": brand
+                      },
+                      {
+                        "ca": "% VAR. 20/19"
+                      }
+                    ],
+                    "rows": [
+                      {
+                        "name": {
+                          "ca": "Espanya"
+                        },
+                        "values": [data[2], 0]
+                      },
+                      {
+                        "name": {
+                          "ca": "Alemanya"
+                        },
+                        "values": [data[9], 0]
+                      },
+                      {
+                        "name": {
+                          "ca": "França"
+                        },
+                        "values": [data[5], 0]
+                      },
+                    ]
+                  }
               }
-              if (data[0] === monthString || data[0] === previousMonthString)
-                dataArray.push(dataObj);
           })
           .on('end', function() {
-            resolve(dataArray);
+            resolve(dataObj);
           });
     });
   });
@@ -31,6 +60,8 @@ function readFiles(inputFilesPath, month) {
         console.table(JSON.stringify(results))
       });
 }
+
+
 
 
 const csvToJson = (inputFilesPath, month) => {
