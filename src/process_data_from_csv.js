@@ -2,52 +2,26 @@ const fs = require('fs');
 const csv = require('fast-csv');
 
 function readFiles(inputFilesPath, month) {
+  var monthString = month.split('-')[0] + 'M' + month.split('-')[1];
+  var previousMonthString = (month.split('-')[0] - 1) + 'M' + month.split('-')[1];
   const promises = inputFilesPath.map((path) => {
     console.log("Reading " + path);
     var brand = path.match(/_(.*?)_/)[1];
     return new Promise((resolve) => {
       var dataObj = {};
+      var dataArray = [];
       return csv
           .parseFile(path, {delimiter: ';', skipLines: 2})
           .on('data', function(data) {
-            if (data[0] === month) {
-                dataObj = {
-                    "title": {
-                      "ca": "Despesa dels turistes"
-                    },
-                    "columns": [
-                      {
-                        "ca": brand
-                      },
-                      {
-                        "ca": "% VAR. 20/19"
-                      }
-                    ],
-                    "rows": [
-                      {
-                        "name": {
-                          "ca": "Espanya"
-                        },
-                        "values": [data[2], 0]
-                      },
-                      {
-                        "name": {
-                          "ca": "Alemanya"
-                        },
-                        "values": [data[9], 0]
-                      },
-                      {
-                        "name": {
-                          "ca": "França"
-                        },
-                        "values": [data[5], 0]
-                      },
-                    ]
-                  }
+              dataObj = {
+                  "brand": brand,
+                  "data": data
               }
+              if (data[0] === monthString || data[0] === previousMonthString)
+                dataArray.push(dataObj);
           })
           .on('end', function() {
-            resolve(dataObj);
+            resolve(dataArray);
           });
     });
   });
@@ -59,8 +33,6 @@ function readFiles(inputFilesPath, month) {
 }
 
 
-
-
 const csvToJson = (inputFilesPath, month) => {
     let inputFilesList = []
     fs.readdirSync(inputFilesPath).forEach(file => {
@@ -70,51 +42,6 @@ const csvToJson = (inputFilesPath, month) => {
     .then(() => 
         console.log('DONE!')
     );
-
-    // const dataArray = [];
-    // var dataObj = {}
-    // csv
-    //     .parseFile(inputFile, {delimiter: ';', skipLines: 2})
-    //     .on('data', function(data) {
-    //         if (data[0] === month)
-    //             dataArray.push(data);
-    //             dataObj = {
-    //                 "title": {
-    //                   "ca": "Despesa dels turistes"
-    //                 },
-    //                 "columns": [
-    //                   {
-    //                     "ca": "ILLES BALEARS"
-    //                   },
-    //                   {
-    //                     "ca": "% VAR. 20/19"
-    //                   }
-    //                 ],
-    //                 "rows": [
-    //                   {
-    //                     "name": {
-    //                       "ca": "Espanya"
-    //                     },
-    //                     "values": [data[2], 0]
-    //                   },
-    //                   {
-    //                     "name": {
-    //                       "ca": "Alemanya"
-    //                     },
-    //                     "values": [data[9], 0]
-    //                   },
-    //                   {
-    //                     "name": {
-    //                       "ca": "Fraça"
-    //                     },
-    //                     "values": [data[5], 0]
-    //                   },
-    //                 ]
-    //               }
-    //     })
-    //     .on('end', function() {
-    //         console.log(JSON.stringify(dataObj));
-    //     });
 }
 
 module.exports = { csvToJson };

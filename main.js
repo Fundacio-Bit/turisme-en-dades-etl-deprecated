@@ -20,3 +20,7 @@ if (argv.month)
 
 const inputFile = path + '/files/2008 CMIT PLANTILLA amb dades.xlsx'
 processData.excelToJson(inputFile)
+
+
+// const csv_path = path + '/files/csv/Turistes/'
+// getdata.csvToJson(csv_path, month)
