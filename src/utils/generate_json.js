@@ -5,8 +5,11 @@
  * @param {number} init_row 
  * @param {number} num_rows 
  */
-const getDataSingleTable = (data, init_row, num_rows) => {
-    var title = Object.values(data[init_row])[0];
+const getDataSingleTable = (data, init_row, num_rows, isTitleComposed) => {
+    if (isTitleComposed)
+        var title = Object.values(data[init_row])[0] + ' / ' + Object.values(data[init_row])[1];
+    else
+        var title = Object.values(data[init_row])[0];
     var columns = [];
     Object.values(data[init_row + 1]).forEach(item => columns.push({'ca':item}))
     var rows = [];
@@ -222,5 +225,75 @@ const getDataOcupacioAcc = (data, init_row, num_rows) => {
     return dataObj;
 }
 
+const getTableAcc = (data, title_row, column_row, data_rows, isFirst) => {
+    if (isFirst) {
+        var title = Object.values(data[title_row])[0];
+        var columns = [];
+        Object.values(data[column_row]).slice(0, 10).forEach(item => columns.push({'ca':item}))
+        var rows = [];
+        data_rows.forEach(row => {
+            let all_values =[];
+            Object.values(data[row]).slice(0, 10).forEach(item => all_values.push(item.toString()))
+            rows.push({'name': {'ca': ''}, 'values': all_values})
+        }) 
+        } else {
+            var title = Object.values(data[title_row])[1];
+            var columns = [];
+            Object.values(data[column_row]).slice(11,13).forEach(item => columns.push({'ca':item}))
+            var rows = [];
+            var isFirstRow = true
+            data_rows.forEach(row => {
+                let all_values =[];
+                if(isFirstRow){
+                    Object.values(data[row]).slice(11, 13).forEach(item => all_values.push(item.toString()))
+                    rows.push({'name': {'ca': Object.values(data[row])[10]}, 'values': all_values})
+                    isFirstRow = false;
+                } else {
+                    Object.values(data[row]).forEach(item => all_values.push(item.toString()))
+                    let values = all_values.shift();
+                    rows.push({'name': {'ca': Object.values(data[row])[0]}, 'values': all_values.slice(0,2)})
+                }
+            }) 
+        }
+
+    var dataObj = 
+        {
+        "title": {
+            "ca": title
+        },
+        "columns": columns,
+        "rows": rows
+    }
+    return dataObj;
+}
+
+/**
+ * 
+ * @param {Object} data 
+ * @param {Number} init_row 
+ * @param {Number} init_column 
+ */
+const getTableDataSOS = (data, init_row, init_column) => {
+    var title = Object.keys(data[init_row])[init_column];
+
+    var columns = [];
+    Object.values(data[init_row]).slice(init_column, init_column + 10).forEach(item => columns.push({'ca':item}))
+
+    var rows = [];
+    var values =[];
+    Object.values(data[init_row + 1]).slice(init_column, init_column + 10).forEach(item => values.push(item.toString()))
+    rows.push({'name': {'ca': ''}, 'values': values})
+    var dataObj = 
+        {
+        "title": {
+            "ca": title
+        },
+        "columns": columns,
+        "rows": rows
+    }
+    return dataObj;
+}
+
+
 module.exports = { getDataSingleTable,getDataDoubleTable, getDataSeaPassengersArrivalsAP, 
-    getDataSeaPassengersArrivalsP, getDataOcupacio, getDataOcupacioAcc }
+    getDataSeaPassengersArrivalsP, getDataOcupacio, getDataOcupacioAcc, getTableAcc, getTableDataSOS }

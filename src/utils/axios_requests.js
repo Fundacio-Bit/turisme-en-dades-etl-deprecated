@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NTI2MTEzfQ.B__pcBd3XUQPpJfRkObGAGlFzYSfTaLwZ7KnfFhQHJs";
+const API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NTI1Mjc4fQ.ZIUQONcc68M_j0mhUhGSvKkAPZ9nS2WmZF2SeqaEmvM";
 
 const makePost = (baseUrl, dataObj) => { 
   const headers = {

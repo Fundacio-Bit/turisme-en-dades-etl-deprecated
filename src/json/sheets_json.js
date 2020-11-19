@@ -1,6 +1,6 @@
 const rows = 
 {
-    tourist_arrivals:  { initRow: 0, numRows: 11 },
+    tourist_arrivals: { initRow: 0, numRows: 11 },
     tourist_arrivals_acc:  { initRow: 15, numRows: 11 },
     despesa_turistes:  { initRow: 31, numRows: 11 },
     despesa_turistes_acc:  { initRow: 45, numRows: 11 },
@@ -12,7 +12,7 @@ const rows =
     pernoctacions_per_illa_acc:  { initRow: 99, numRows: 4 },
     ocupacio:  { initRow: 0, numRows: 9 },
     air_passengers_arrivals:  { initRow: 0, numRows: 11 },
-    air_passengers_arrivals_acc:  { initRow: 16, numRows: 11 },
+    air_passengers_arrivals_acc: { initRow: 16, numRows: 11 },
     cruise_passengers_arrivals_autoritat_portuaria:  { initRow: 1, numRows: 6 },
     cruise_passengers_arrivals_ports:  { initRow: 7, numRows: 6 },
     cruise_passengers_arrivals_acc_autoritat_portuaria:  { initRow: 16, numRows: 6 },
@@ -20,7 +20,13 @@ const rows =
     sea_passengers_arrivals_autoritat_portuaria:  { initRow: 29, numRows: 6 },
     sea_passengers_arrivals_ports:  { initRow: 37, numRows: 3 },
     sea_passengers_arrivals_acc_autoritat_portuaria:  { initRow: 41, numRows: 6 },
-    sea_passengers_arrivals_acc_ports:  { initRow: 49, numRows: 3 },
+    sea_passengers_arrivals_acc_ports: { initRow: 49, numRows: 3 },
+    energy_demand: { titleRow: 0, columnRow: 1, dataRows: [2] },
+    human_pressure: { titleRow: 0, columnRow: 1, dataRows: [2, 3, 4] },
+    affiliates: { initRow: 0, initColumn: 0 },
+    unemployed: { initRow: 14, numRows: 1 },
+    temporality: { initRow: 19, numRows: 1 },
+    companies: { initRow: 0, initColumn: 10 }
 };
   
 module.exports = { rows };
