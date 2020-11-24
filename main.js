@@ -2,7 +2,6 @@ const argv = require('yargs').argv
 const { exit } = require('yargs');
 
 const moment = require('moment');
-const path = require('path').resolve(__dirname, '../');
 
 const processData = require('./src/process_data');
 
@@ -26,5 +25,11 @@ else {
     exit()
 }
 
-const inputFile = path + '/files/excel/' + filename
-processData.excelToJson(inputFile, month)
+if (argv.mode)
+  var baseUrl = 'http://localhost:5300'
+else {
+  var baseUrl = 'http://54.77.111.120:5300'
+}
+
+const inputFile = require('path').resolve(__dirname, '../') + '/files/excel/' + filename
+processData.excelToJson(inputFile, month, baseUrl)

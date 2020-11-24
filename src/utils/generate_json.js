@@ -8,7 +8,27 @@ function round(value, precision) {
     return Math.round(value * multiplier) / multiplier;
 }
 
-/**
+
+const getTitle = (data, title_rows, columns, isValue, separator) => {
+    var title = ''
+    if (isValue) {
+        columns.forEach(column, index) {
+            title = index === 0?
+                title + Object.values(data[title_row])[column]
+                : title + separator + Object.values(data[title_row])[column]
+        }
+    
+    } else {
+        columns.forEach(column, index) {
+            title = index === 0?
+                title + Object.keys(data[title_row])[column]
+                : title + separator + Object.values(data[title_row])[column]
+        }
+    }
+    return title
+}
+
+        /**
  * 
  * @param {Object} data 
  * @param {number} init_row 
@@ -41,6 +61,7 @@ const getDataSingleTable = (data, month, section, init_row, num_rows, isTitleCom
             "ca": title
         },
         "section": section,
+        "chart_id": chart,
         "columns": columns,
         "rows": rows
     }
@@ -260,7 +281,7 @@ const getDataSeaPassengersArrivalsP = (data, month, section, init_row, num_rows,
  * @param {number} init_row 
  * @param {number} num_rows 
  */
-const getDataOcupacio = (data, month, section, init_row, num_rows) => {
+const getDataOccupancy = (data, month, section, init_row, num_rows) => {
     var title = Object.keys(data[init_row + 1])[0];
     var columns = [];
     Object.values(data[init_row]).forEach(item => columns.push({'ca':item}))
@@ -296,7 +317,7 @@ const getDataOcupacio = (data, month, section, init_row, num_rows) => {
  * @param {number} init_row 
  * @param {number} num_rows 
  */
-const getDataOcupacioAcc = (data, month, section, init_row, num_rows) => {
+const getDataOccupancyAcc = (data, month, section, init_row, num_rows) => {
     var title = Object.keys(data[init_row + 1])[9];
     var columns = [];
     Object.values(data[init_row]).forEach(item => columns.push({'ca':item}))
@@ -425,4 +446,4 @@ const getTableDataSOS = (data, month, section, init_row, init_column) => {
 
 
 module.exports = { getDataSingleTable,getTableDataECS, getTableDataECSAcc, getDataSeaPassengersArrivalsAP, 
-    getDataSeaPassengersArrivalsP, getDataOcupacio, getDataOcupacioAcc, getTableAcc, getTableDataSOS }
+    getDataSeaPassengersArrivalsP, getDataOccupancy, getDataOccupancyAcc, getTableAcc, getTableDataSOS }
