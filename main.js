@@ -7,6 +7,7 @@ const path = require('path').resolve(__dirname, '../');
 const processData = require('./src/process_data');
 
 var month = moment().format('YYYY-MM');
+var filename = '';
 // ----------------------------------------------------
 // Read arguments
 // ----------------------------------------------------
@@ -18,9 +19,12 @@ if (argv.month)
     exit()
   }
 
-const inputFile = path + '/files/2008 CMIT PLANTILLA amb dades.xlsx'
-processData.excelToJson(inputFile)
+if (argv.file)
+    filename = argv.file
+else {
+    console.log('You must enter input file name: --file=<my_file>')
+    exit()
+}
 
-
-// const csv_path = path + '/files/csv/Turistes/'
-// getdata.csvToJson(csv_path, month)
+const inputFile = path + '/files/excel/' + filename
+processData.excelToJson(inputFile, month)

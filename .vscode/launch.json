@@ -11,7 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\main.js"
+            "program": "${workspaceFolder}\\main.js",
+            "args": ["--file=2008 CMIT PLANTILLA amb dades.xlsx"]
         }
     ]
 }

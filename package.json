@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "moment": "^2.29.1",
+    "numbro": "^2.3.2",
     "xlsx": "^0.16.8",
     "yargs": "^16.1.0"
   }
