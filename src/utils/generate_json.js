@@ -8,42 +8,44 @@ function round(value, precision) {
     return Math.round(value * multiplier) / multiplier;
 }
 
+const getTitle = (data, title_row, sub_title_row, separator) => {
+    var title = '';
+    if (title_row) 
+        if (title_row.key != null) {
+            title = Object.keys(data[title_row['numRow']])[title_row.key];
+        } else if (title_row.value != null) {
+            title = Object.values(data[title_row['numRow']])[title_row.value]
+        }
 
-const getTitle = (data, title_rows, columns, isValue, separator) => {
-    var title = ''
-    if (isValue) {
-        columns.forEach(column, index) {
-            title = index === 0?
-                title + Object.values(data[title_row])[column]
-                : title + separator + Object.values(data[title_row])[column]
+    if (sub_title_row) 
+        if (sub_title_row.key != null) {
+            title = title + separator + Object.keys(data[sub_title_row['numRow']])[sub_title_row.key]
+        } else if (sub_title_row.value != null) {
+            title = title + separator + Object.values(data[sub_title_row['numRow']])[sub_title_row.value]
         }
-    
-    } else {
-        columns.forEach(column, index) {
-            title = index === 0?
-                title + Object.keys(data[title_row])[column]
-                : title + separator + Object.values(data[title_row])[column]
-        }
-    }
+    console.log('Title: ', title)
     return title
 }
 
-        /**
- * 
- * @param {Object} data 
- * @param {number} init_row 
- * @param {number} num_rows 
- */
-const getDataSingleTable = (data, month, section, init_row, num_rows, isTitleComposed) => {
-    if (isTitleComposed)
-        var title = Object.values(data[init_row])[0] + ' / ' + Object.values(data[init_row])[1];
-    else
-        var title = Object.values(data[init_row])[0];
+
+const getColumns= (data, column_row) => {
     var columns = [];
-    Object.values(data[init_row + 1]).forEach(item => columns.push({'ca':item}))
+    Object.values(data[column_row.numRow]).forEach(item => columns.push({'ca':item}))
+    console.log('Columns: ', columns.slice(column_row.initColumn, column_row.initColumn + column_row.numColumns))
+    return columns.slice(column_row.initColumn, column_row.initColumn + column_row.numColumns);
+}
+
+const getFooter= (data, row) => {
+    var footer = [];
+    Object.values(data[row]).forEach(item => footer.push({'ca':item}))
+    console.log('Footer: ', footer)
+    return footer;
+}
+
+const getRows= (data, input_rows, num_columns) => {
     var rows = [];
-    let from_row = init_row + 2;
-    let to_row = from_row + num_rows;
+    let from_row = input_rows.initRow;
+    let to_row = from_row + input_rows.numRows;
     for (let i = from_row; i < to_row; i++) {
         let all_values =[];
         Object.values(data[i]).forEach(item => {
@@ -52,9 +54,15 @@ const getDataSingleTable = (data, month, section, init_row, num_rows, isTitleCom
                 : item
             all_values.push(value)
         })
+        all_values = all_values.slice(input_rows.initColumn, input_rows.initColumn + num_columns + 1)
         let values = all_values.shift();
-        rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values})
+        rows.push({'name': {'ca': Object.values(data[i])[input_rows.initColumn]}, 'values':all_values})
     }
+    console.log('Rows: ', rows)
+    return rows;
+}
+
+setDataGrid = (month, title, section, chart, columns, rows, footer) => {
     var dataObj = {
         "month": month,
         "title": {
@@ -63,22 +71,27 @@ const getDataSingleTable = (data, month, section, init_row, num_rows, isTitleCom
         "section": section,
         "chart_id": chart,
         "columns": columns,
-        "rows": rows
+        "rows": rows,
+        "footer": footer
     }
     return dataObj;
 }
 
-/**
- * 
- * @param {Object} data 
- * @param {number} init_row 
- * @param {number} num_rows 
- */
-const getTableDataECS = (data, month, section, init_row, num_rows, title_row) => {
-    if (title_row)
-        var title =  Object.values(data[title_row])[1] + ' - ' +Object.values(data[init_row])[0] ;
-    else
-        var title =  Object.keys(data[init_row])[0] + ' - ' +Object.values(data[init_row])[0] ;
+const getDataSingleTable = (data, month, section, chart, title_row, sub_title_row, column_row, footer_row, rows) => {
+    var title = getTitle(data, title_row, sub_title_row, '/');
+
+    var columns = getColumns(data, column_row);
+
+    var rows = getRows(data, rows, column_row.numColumns); 
+    
+    var footer = footer_row? getFooter(data, footer_row) : []
+
+    return setDataGrid(month, title, section, chart, columns, rows, footer);
+}
+
+const getTableDataECS = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows) => {
+    var title = getTitle(data, title_row, sub_title_row, ' - ');
+
     var columns = [];
     Object.values(data[0]).slice(2).forEach(item => columns.push({'ca':item}))
     var rows = [];
@@ -109,29 +122,16 @@ const getTableDataECS = (data, month, section, init_row, num_rows, title_row) =>
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    var dataObj = {
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns,
-        "rows": rows
-    }
-    return dataObj;
+    return setDataGrid(month, title, section, chart, columns, rows);
 }
 
-/**
- * 
- * @param {Object} data 
- * @param {number} init_row 
- * @param {number} num_rows 
- */
-const getTableDataECSAcc = (data, month, section, init_row, num_rows, title_row) => {
-    if (title_row)
-        var title =  Object.values(data[title_row])[1] + ' - ' +Object.values(data[init_row])[0] ;
-    else
-        var title =  Object.keys(data[init_row])[0] + ' - ' +Object.values(data[init_row])[0] ;
+const getTableDataECSAcc = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows) => {
+    var title = getTitle(data, title_row, sub_title_row, ' - ');
+
+    // if (title_row)
+    //     var title =  Object.values(data[title_row])[1] + ' - ' +Object.values(data[init_row])[0] ;
+    // else
+    //     var title =  Object.keys(data[init_row])[0] + ' - ' +Object.values(data[init_row])[0] ;
     var columns = [];
     Object.values(data[0]).slice(2).forEach(item => columns.push({'ca':item}))
     var rows = [];
@@ -162,26 +162,13 @@ const getTableDataECSAcc = (data, month, section, init_row, num_rows, title_row)
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    var dataObj = {
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns,
-        "rows": rows
-    }
-    return dataObj;
+    return setDataGrid(month, title, section, chart, columns, rows);
 }
 
-/**
- * 
- * @param {Object} data 
- * @param {number} init_row 
- * @param {number} num_rows 
- */
-const getDataSeaPassengersArrivalsAP = (data, month, section, init_row, num_rows) => {
-    var title =  Object.values(data[init_row])[0] + ' - '  + Object.values(data[init_row + 2])[0];
+const getDataSeaPassengersArrivalsAP = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows) => {
+    var title = getTitle(data, title_row, sub_title_row, ' - ');
+
+    // var title = Object.values(data[init_row])[0] + ' - '  + Object.values(data[init_row + 2])[0];
     var columns = [];
     Object.values(data[init_row + 1]).forEach(item => columns.push({'ca':item}))
     var rows = [];
@@ -213,28 +200,14 @@ const getDataSeaPassengersArrivalsAP = (data, month, section, init_row, num_rows
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    var dataObj = {
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns,
-        "rows": rows
-    }
-    return dataObj;
+    return setDataGrid(month, title, section, chart, columns, rows);
 }
 
-/**
- * 
- * @param {Object} data 
- * @param {number} init_row 
- * @param {number} num_rows 
- */
-const getDataSeaPassengersArrivalsP = (data, month, section, init_row, num_rows, title_row) => {
-    var title =  Object.values(data[title_row])[0] + ' - '  + Object.values(data[init_row])[0];
+const getDataSeaPassengersArrivalsP = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows ) => {
+    var title = getTitle(data, title_row, sub_title_row, ' - ');
+    // var title =  Object.values(data[title_row])[0] + ' - '  + Object.values(data[init_row])[0];
     var columns = [];
-    Object.values(data[title_row + 1]).forEach(item => columns.push({'ca':item}))
+    Object.values(data[title_row.numRow + 1]).forEach(item => columns.push({'ca':item}))
     var rows = [];
     var to_row = init_row+ num_rows
     for (let i = init_row; i < to_row; i++) {
@@ -263,16 +236,7 @@ const getDataSeaPassengersArrivalsP = (data, month, section, init_row, num_rows,
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    var dataObj = {
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns,
-        "rows": rows
-    }
-    return dataObj;
+    return setDataGrid(month, title, section, chart, columns, rows);
 }
 
 /**
@@ -281,75 +245,10 @@ const getDataSeaPassengersArrivalsP = (data, month, section, init_row, num_rows,
  * @param {number} init_row 
  * @param {number} num_rows 
  */
-const getDataOccupancy = (data, month, section, init_row, num_rows) => {
-    var title = Object.keys(data[init_row + 1])[0];
-    var columns = [];
-    Object.values(data[init_row]).forEach(item => columns.push({'ca':item}))
-    var rows = [];
-    let from_row = init_row + 1;
-    let to_row = from_row + num_rows;
-    for (let i = from_row; i < to_row; i++) {
-        let all_values =[];
-        Object.values(data[i]).forEach(item => {
-            let value = typeof(item) === 'string'
-                ? item 
-                : numbro(round(item,1)).format({thousandSeparated: true})
-            all_values.push(value)
-        })
-        let values = all_values.shift();
-        rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values.slice(0, 8)})
-    }
-    var dataObj = {
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns.slice(0,8),
-        "rows": rows
-    }
-    return dataObj;
-}
 
-/**
- * 
- * @param {Object} data 
- * @param {number} init_row 
- * @param {number} num_rows 
- */
-const getDataOccupancyAcc = (data, month, section, init_row, num_rows) => {
-    var title = Object.keys(data[init_row + 1])[9];
-    var columns = [];
-    Object.values(data[init_row]).forEach(item => columns.push({'ca':item}))
-    var rows = [];
-    let from_row = init_row + 1;
-    let to_row = from_row + num_rows;
-    for (let i = from_row; i < to_row; i++) {
-        let all_values =[];
-        Object.values(data[i]).forEach(item => {
-            let value = typeof(item) === 'string'
-                ? item 
-                : numbro(round(item,1)).format({thousandSeparated: true})
-            all_values.push(value)
-        })
-        let values = all_values.shift();
-        rows.push({'name': {'ca': Object.values(data[i])[9]}, 'values':all_values.slice(9)})
-    }
-    var dataObj = {
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns.slice(8),
-        "rows": rows.slice(0,2)
-    }
-    return dataObj;
-}
-
-const getTableAcc = (data, month, section, title_row, column_row, data_rows, isFirst) => {
+const getTableAcc = (data, month, section, chart, title_row, column_row, num_columns, data_rows, isFirst) => {
+    var title = getTitle(data, title_row);
     if (isFirst) {
-        var title = Object.values(data[title_row])[0];
         var columns = [];
         Object.values(data[column_row]).slice(0, 10).forEach(item => columns.push({'ca':item}))
         var rows = [];
@@ -366,7 +265,6 @@ const getTableAcc = (data, month, section, title_row, column_row, data_rows, isF
             rows.push({'name': {'ca': ''}, 'values': all_values})
         }) 
     } else {
-        var title = Object.values(data[title_row])[1];
         var columns = [];
         Object.values(data[column_row]).slice(11,13).forEach(item => columns.push({'ca':item}))
         var rows = [];
@@ -399,26 +297,12 @@ const getTableAcc = (data, month, section, title_row, column_row, data_rows, isF
         }) 
     }
 
-    var dataObj ={
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns,
-        "rows": rows
-    }
-    return dataObj;
+    return setDataGrid(month, title, section, chart, columns, rows);
 }
 
-/**
- * 
- * @param {Object} data 
- * @param {Number} init_row 
- * @param {Number} init_column 
- */
-const getTableDataSOS = (data, month, section, init_row, init_column) => {
-    var title = Object.keys(data[init_row])[init_column];
+const getTableDataSOS = (data, month, section, chart, title_row, init_row, init_column) => {
+    var title = getTitle(data, title_row);
+    // var title = Object.keys(data[init_row])[init_column];
 
     var columns = [];
     Object.values(data[init_row]).slice(init_column, init_column + 10).forEach(item => columns.push({'ca':item}))
@@ -432,18 +316,10 @@ const getTableDataSOS = (data, month, section, init_row, init_column) => {
         values.push(value)
     })
     rows.push({'name': {'ca': ''}, 'values': values})
-    var dataObj = {
-        "month": month,
-        "title": {
-            "ca": title
-        },
-        "section": section,
-        "columns": columns,
-        "rows": rows
-    }
-    return dataObj;
+
+    return setDataGrid(month, title, section, chart, columns, rows);
 }
 
 
 module.exports = { getDataSingleTable,getTableDataECS, getTableDataECSAcc, getDataSeaPassengersArrivalsAP, 
-    getDataSeaPassengersArrivalsP, getDataOccupancy, getDataOccupancyAcc, getTableAcc, getTableDataSOS }
+    getDataSeaPassengersArrivalsP, getTableAcc, getTableDataSOS }
