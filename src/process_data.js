@@ -18,16 +18,16 @@ const excelToJson = (inputFile, month, baseUrl) => {
             case sections[0]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                request.makePost(baseUrl, Tourists.touristArrivals(datos, month)); 
-                request.makePost(baseUrl, Tourists.touristArrivalsAcc(datos, month));
-                request.makePost(baseUrl, Tourists.spending(datos, month));
-                request.makePost(baseUrl, Tourists.spendingAcc(datos, month));
-                request.makePost(baseUrl, Tourists.spendingTotal(datos, month));
-                request.makePost(baseUrl, Tourists.spendingTotalAcc(datos, month));
-                request.makePost(baseUrl, Tourists.spendingStays(datos, month));
-                request.makePost(baseUrl, Tourists.spendingStaysIslands(datos, month));
-                request.makePost(baseUrl, Tourists.spendingStaysAcc(datos, month));
-                request.makePost(baseUrl, Tourists.spendingStaysIslandsAcc(datos, month));
+                // request.makePost(baseUrl, Tourists.touristArrivals(datos, month)); 
+                // request.makePost(baseUrl, Tourists.touristArrivalsAcc(datos, month));
+                // request.makePost(baseUrl, Tourists.spending(datos, month));
+                // request.makePost(baseUrl, Tourists.spendingAcc(datos, month));
+                // request.makePost(baseUrl, Tourists.spendingTotal(datos, month));
+                // request.makePost(baseUrl, Tourists.spendingTotalAcc(datos, month));
+                // request.makePost(baseUrl, Tourists.spendingStays(datos, month));
+                // request.makePost(baseUrl, Tourists.spendingStaysIslands(datos, month));
+                // request.makePost(baseUrl, Tourists.spendingStaysAcc(datos, month));
+                // request.makePost(baseUrl, Tourists.spendingStaysIslandsAcc(datos, month));
                 break;
             case sections[1]:
                 console.log(sheet)
@@ -63,8 +63,8 @@ const excelToJson = (inputFile, month, baseUrl) => {
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
                 // request.makePost(baseUrl, Social.affiliates(datos, month));
-                // request.makePost(baseUrl, Social.unemployed(datos, month));
-                // request.makePost(baseUrl, Social.temporality(datos, month));
+                request.makePost(baseUrl, Social.unemployed(datos, month));
+                request.makePost(baseUrl, Social.temporality(datos, month));
                 // request.makePost(baseUrl, Social.companies(datos, month));
                 break;
             default:
