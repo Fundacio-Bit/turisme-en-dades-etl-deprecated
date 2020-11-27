@@ -42,7 +42,7 @@ const getFooter= (data, row) => {
     return footer;
 }
 
-const getRows= (data, input_rows, num_columns) => {
+const getRows= (data, input_rows, num_columns, hasHeader) => {
     var rows = [];
     let from_row = input_rows.initRow;
     let to_row = from_row + input_rows.numRows;
@@ -54,9 +54,13 @@ const getRows= (data, input_rows, num_columns) => {
                 : item
             all_values.push(value)
         })
+        let column_name = '';
         all_values = all_values.slice(input_rows.initColumn, input_rows.initColumn + num_columns + 1)
-        let values = all_values.shift();
-        rows.push({'name': {'ca': Object.values(data[i])[input_rows.initColumn]}, 'values':all_values})
+        if (hasHeader){
+            let values = all_values.shift();
+            column_name = Object.values(data[i])[input_rows.initColumn]
+        }
+        rows.push({'name': {'ca': column_name}, 'values':all_values})
     }
     console.log('Rows: ', rows)
     return rows;
@@ -82,14 +86,14 @@ const getDataSingleTable = (data, month, section, chart, title_row, sub_title_ro
 
     var columns = getColumns(data, column_row);
 
-    var rows = getRows(data, rows, column_row.numColumns); 
+    var rows = getRows(data, rows, column_row.numColumns, false); 
     
     var footer = footer_row? getFooter(data, footer_row) : []
 
     return setDataGrid(month, title, section, chart, columns, rows, footer);
 }
 
-const getTableDataECS = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows) => {
+const getTableDataECS = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows, footer_row) => {
     var title = getTitle(data, title_row, sub_title_row, ' - ');
 
     var columns = [];
@@ -98,7 +102,7 @@ const getTableDataECS = (data, month, section, chart, title_row, sub_title_row, 
     var to_row = init_row + num_rows
     for (let i = init_row; i < to_row; i++) {
         let all_values =[];
-        if (i === init_row || (!title_row && i===to_row-1)) {
+        if (i === init_row || i===to_row-1) {
             Object.values(data[i]).slice(1).forEach((item, index) => {
                 let value =  isFinite(item)?
                     index % 2 === 0 ? 
@@ -122,16 +126,13 @@ const getTableDataECS = (data, month, section, chart, title_row, sub_title_row, 
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    return setDataGrid(month, title, section, chart, columns, rows);
+    var footer = footer_row? getFooter(data, footer_row) : []
+    return setDataGrid(month, title, section, chart, columns, rows, footer);
 }
 
-const getTableDataECSAcc = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows) => {
+const getTableDataECSAcc = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows, footer_row) => {
     var title = getTitle(data, title_row, sub_title_row, ' - ');
 
-    // if (title_row)
-    //     var title =  Object.values(data[title_row])[1] + ' - ' +Object.values(data[init_row])[0] ;
-    // else
-    //     var title =  Object.keys(data[init_row])[0] + ' - ' +Object.values(data[init_row])[0] ;
     var columns = [];
     Object.values(data[0]).slice(2).forEach(item => columns.push({'ca':item}))
     var rows = [];
@@ -162,10 +163,11 @@ const getTableDataECSAcc = (data, month, section, chart, title_row, sub_title_ro
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    return setDataGrid(month, title, section, chart, columns, rows);
+    var footer = footer_row? getFooter(data, footer_row) : []
+    return setDataGrid(month, title, section, chart, columns, rows, footer);
 }
 
-const getDataSeaPassengersArrivalsAP = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows) => {
+const getDataSeaPassengersArrivalsAP = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows, footer_row) => {
     var title = getTitle(data, title_row, sub_title_row, ' - ');
 
     // var title = Object.values(data[init_row])[0] + ' - '  + Object.values(data[init_row + 2])[0];
@@ -200,10 +202,11 @@ const getDataSeaPassengersArrivalsAP = (data, month, section, chart, title_row, 
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    return setDataGrid(month, title, section, chart, columns, rows);
+    var footer = footer_row? getFooter(data, footer_row) : []
+    return setDataGrid(month, title, section, chart, columns, rows, footer);
 }
 
-const getDataSeaPassengersArrivalsP = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows ) => {
+const getDataSeaPassengersArrivalsP = (data, month, section, chart, title_row, sub_title_row, init_row, num_rows, footer_row ) => {
     var title = getTitle(data, title_row, sub_title_row, ' - ');
     // var title =  Object.values(data[title_row])[0] + ' - '  + Object.values(data[init_row])[0];
     var columns = [];
@@ -236,7 +239,8 @@ const getDataSeaPassengersArrivalsP = (data, month, section, chart, title_row, s
             rows.push({'name': {'ca': Object.values(data[i])[0]}, 'values':all_values});
         }
     }
-    return setDataGrid(month, title, section, chart, columns, rows);
+    var footer = footer_row? getFooter(data, footer_row) : []
+    return setDataGrid(month, title, section, chart, columns, rows, footer);
 }
 
 /**
@@ -246,7 +250,7 @@ const getDataSeaPassengersArrivalsP = (data, month, section, chart, title_row, s
  * @param {number} num_rows 
  */
 
-const getTableAcc = (data, month, section, chart, title_row, column_row, num_columns, data_rows, isFirst) => {
+const getTableAcc = (data, month, section, chart, title_row, column_row, data_rows, footer_row, isFirst) => {
     var title = getTitle(data, title_row);
     if (isFirst) {
         var columns = [];
@@ -296,30 +300,10 @@ const getTableAcc = (data, month, section, chart, title_row, column_row, num_col
             }
         }) 
     }
-
-    return setDataGrid(month, title, section, chart, columns, rows);
-}
-
-const getTableDataSOS = (data, month, section, chart, title_row, init_row, init_column) => {
-    var title = getTitle(data, title_row);
-    // var title = Object.keys(data[init_row])[init_column];
-
-    var columns = [];
-    Object.values(data[init_row]).slice(init_column, init_column + 10).forEach(item => columns.push({'ca':item}))
-
-    var rows = [];
-    var values =[];
-    Object.values(data[init_row + 1]).slice(init_column, init_column + 10).forEach(item => {
-        let value = typeof(item) === 'string'
-            ? item 
-            : numbro(round(item,1)).format({thousandSeparated: true})
-        values.push(value)
-    })
-    rows.push({'name': {'ca': ''}, 'values': values})
-
-    return setDataGrid(month, title, section, chart, columns, rows);
+    var footer = footer_row? getFooter(data, footer_row) : []
+    return setDataGrid(month, title, section, chart, columns, rows, footer);
 }
 
 
 module.exports = { getDataSingleTable,getTableDataECS, getTableDataECSAcc, getDataSeaPassengersArrivalsAP, 
-    getDataSeaPassengersArrivalsP, getTableAcc, getTableDataSOS }
+    getDataSeaPassengersArrivalsP, getTableAcc }

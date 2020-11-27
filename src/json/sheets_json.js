@@ -34,7 +34,7 @@ const rows =
         footerRow: 58 },
     
     spending_total: { 
-        section: 'ecs_spending', chart:'',
+        section: 'ecs_spending', chart:'ecs_spending_islands_total',
         titleRow: {numRow: 61, key: null, value: 0}, 
         columnRow: {numRow: 1, initColumn: 0, numColumns: 8 },
         rows: {initRow: 63, initColumn: 0, numRows: 5 },
@@ -113,55 +113,93 @@ const rows =
 
     cruise_passengers_arrivals_autoritat_portuaria: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_cruises_ap_total',
-        titleRow: {numRow: 1, key: 0, value: null}, subTitleRow: {numRow: 1, key: null, value: 0}, 
-        columnRow: 0, numColumns: 0, initRow: 1, initColumn: 0, numRows: 6 },
+        titleRow: {numRow: 1, key: 0, value: null},
+        subTitleRow: {numRow: 1, key: null, value: 0}, 
+        columnRow: 0, numColumns: 0, 
+        initRow: 1, initColumn: 0, numRows: 6,
+        footerRow: 13
+    },
     
     cruise_passengers_arrivals_ports: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_cruises_pib_total',
         titleRow: {numRow: 7, key: 0, value: null}, subTitleRow: {numRow: 7, key: null, value: 0}, 
-        columnRow: 0, numColumns: 0, initRow: 7, initColumn: 0, numRows: 6 },
+        columnRow: 0, numColumns: 0,
+        initRow: 7, initColumn: 0, numRows: 6,
+        footerRow: 13
+    },
 
     cruise_passengers_arrivals_acc_autoritat_portuaria: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_cruises_ap_cumulative',
         titleRow: {numRow: 14, key: null, value: 1}, subTitleRow: {numRow: 1, key: null, value: 0}, 
-        columnRow: 0, numColumns: 0, initRow: 16, initColumn: 0, numRows: 6 },
+        columnRow: 0, numColumns: 0,
+        initRow: 16, initColumn: 0, numRows: 6,
+        footerRow: 28
+    },
 
     cruise_passengers_arrivals_acc_ports: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_cruises_pib_cumulative',
         titleRow: {numRow: 14, key: null, value: 1}, subTitleRow: {numRow: 7, key: null, value: 0}, 
-        columnRow: 0, numColumns: 0, initRow: 22, initColumn: 0, numRows: 6 },
+        columnRow: 0, numColumns: 0,
+        initRow: 22, initColumn: 0, numRows: 6,
+        footerRow: 28
+    },
 
     sea_passengers_arrivals_autoritat_portuaria: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_regular_ap_total',
         titleRow: {numRow: 29, key: null, value: 0}, subTitleRow: {numRow: 1, key: null, value: 0}, 
-        columnRow: 1, numColumns: 0, initRow: 29, initColumn: 0, numRows: 6 },
+        columnRow: 1, numColumns: 0,
+        initRow: 29, initColumn: 0, numRows: 6,
+        footerRow: 40
+    },
 
     sea_passengers_arrivals_ports: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_regular_pib_total',
         titleRow: {numRow: 29, key: null, value: 0}, subTitleRow: {numRow: 7, key: null, value: 0}, 
-        columnRow: 1, numColumns: 0, initRow: 37, initColumn: 0, numRows: 3 },
+        columnRow: 1, numColumns: 0,
+        initRow: 37, initColumn: 0, numRows: 3,
+        footerRow: 40
+    },
 
     sea_passengers_arrivals_acc_autoritat_portuaria: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_regular_ap_cumulative',
         titleRow: {numRow: 41, key: null, value: 0}, subTitleRow: {numRow: 1, key: null, value: 0}, 
-        columnRow: 1, numColumns: 0, initRow: 41, initColumn: 0, numRows: 6 },
+        columnRow: 1, numColumns: 0,
+        initRow: 41, initColumn: 0, numRows: 6,
+        footerRow: 52
+    },
 
     sea_passengers_arrivals_acc_ports: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_regular_pib_cumulative',
         titleRow: {numRow: 41, key: null, value: 0}, subTitleRow: {numRow: 7, key: null, value: 0}, 
-        columnRow: 1, numColumns: 0, initRow: 49, initColumn: 0, numRows: 3 },
+        columnRow: 1, numColumns: 0, initRow: 49,
+        initColumn: 0, numRows: 3,
+        footerRow: 52
+    },
 
+    // AMBIENTAL
+    // ---------
     energy_demand: { 
         section: 'ens_energy_demand', chart:'ens_energy_total',
-        titleRow: {numRow: 0, key: null, value: 0}, columnRow: 1, dataRows: [2] },
+        titleRow: {numRow: 0, key: null, value: 0},
+        columnRow: 1, dataRows: [2],
+        footerRow: null
+    },
 
     human_pressure: { 
         section: 'ens_human_pressure', chart:'ens_human_pressure_total',
-        titleRow: {numRow: 0, key: null, value: 1}, columnRow: 1, dataRows: [2, 3, 4] },
+        titleRow: {numRow: 0, key: null, value: 1},
+        columnRow: 1, dataRows: [2, 3, 4],
+        footerRow: 5
+    },
 
+    // SOCIAL
+    // ------
     affiliates: { 
         section: 'sos_affiliates', chart:'sos_affiliates',
-        titleRow: {numRow: 0, key: 0, value: null}, columnRow: 0, numColumns: 0, initRow: 0, initColumn: 0 },
+        titleRow: {numRow: 0, key: 0, value: null}, 
+        columnRow: {numRow: 0, initColumn: 0, numColumns: 10 },
+        rows: {initRow: 1, initColumn: 0, numRows: 1 },
+        footerRow: null },
 
     unemployed: { 
         section: 'sos_unemployed', chart:'sos_unemployed',
@@ -175,11 +213,14 @@ const rows =
         titleRow: {numRow: 19, key: null, value: 0}, subTitleRow: {numRow: 19, key: null, value: 1}, 
         columnRow: {numRow: 0, initColumn: 0, numColumns: 2 },
         rows: {initRow: 21, initColumn: 0, numRows: 1 },
-        footerRow: null },
+        footerRow: 22 },
 
     companies: { 
         section: 'sos_companies', chart:'sos_companies',
-        titleRow: {numRow: 5, key: 0, value: null}, columnRow: 0, numColumns: 0, initRow: 0, initColumn: 10 }
+        titleRow: {numRow: 5, key: 0, value: null}, 
+        columnRow: {numRow: 0, initColumn: 0, numColumns: 10 },
+        rows: {initRow: 1, initColumn: 10, numRows: 1 },
+        footerRow: null },
 };
 
 module.exports = { sections, rows };
