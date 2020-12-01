@@ -57,15 +57,15 @@ const excelToJson = (inputFile, month, baseUrl) => {
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
                 // request.makePost(baseUrl, Ambiental.energy_demand(datos, month))
-                // request.makePost(baseUrl, Ambiental.human_pressure(datos, month))
+                request.makePost(baseUrl, Ambiental.human_pressure(datos, month))
                 break;
             case sections[5]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                request.makePost(baseUrl, Social.affiliates(datos, month));
-                request.makePost(baseUrl, Social.unemployed(datos, month));
-                request.makePost(baseUrl, Social.temporality(datos, month));
-                request.makePost(baseUrl, Social.companies(datos, month));
+                // request.makePost(baseUrl, Social.affiliates(datos, month));
+                // request.makePost(baseUrl, Social.unemployed(datos, month));
+                // request.makePost(baseUrl, Social.temporality(datos, month));
+                // request.makePost(baseUrl, Social.companies(datos, month));
                 break;
             default:
                 break;
