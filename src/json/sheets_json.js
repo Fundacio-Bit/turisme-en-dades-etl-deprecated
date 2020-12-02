@@ -131,7 +131,7 @@ const rows =
 
     cruise_passengers_arrivals_acc_autoritat_portuaria: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_cruises_ap_cumulative',
-        titleRow: {numRow: 14, key: null, value: 1},
+        titleRow: {numRow: 14, key: null, value: 0},
         subTitleRow: {numRow: 1, key: null, value: 0, separator: '-'}, 
         columnRow: {numRow: 15, initValue: 0, numColumns: 4 },
         rows: {initRow: 16, initValue: 0, numRows: 6, hasHeader: true, hasTitle: true, percentColumns: [2, 4] },
@@ -140,7 +140,7 @@ const rows =
 
     cruise_passengers_arrivals_acc_ports: { 
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_cruises_pib_cumulative',
-        titleRow: {numRow: 14, key: null, value: 1},
+        titleRow: {numRow: 14, key: null, value: 0},
         subTitleRow: {numRow: 7, key: null, value: 0, separator: '-'}, 
         columnRow: {numRow: 15, initValue: 0, numColumns: 4 },
         rows: {initRow: 22, initValue: 0, numRows: 6, hasHeader: true, hasTitle: true, percentColumns: [2, 4] },
@@ -178,7 +178,7 @@ const rows =
         section: 'ecs_sea_passengers_arrivals', chart:'ecs_sea_passengers_arrivals_regular_pib_cumulative',
         titleRow: {numRow: 41, key: null, value: 0},
         subTitleRow: {numRow: 7, key: null, value: 0, separator: '-'}, 
-        columnRow: {numRow: 1, initValue: 0, numColumns: 10 },
+        columnRow: {numRow: 42, initValue: 0, numColumns: 2 },
         rows: {initRow: 49, initValue: 0, numRows: 3, hasHeader: true, hasTitle: true, percentColumns: [2] },
         footerRow: 52
     },
