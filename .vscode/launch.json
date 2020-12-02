@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\main.js",
-            "args": ["--file=2008 CMIT PLANTILLA amb dades.xlsx"]
+            "args": ["--month=2000-12", "--file=2008 CMIT PLANTILLA amb dades.xlsx"]
         }
     ]
 }

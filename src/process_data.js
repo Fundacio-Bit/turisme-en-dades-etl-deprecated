@@ -1,75 +1,75 @@
 const XLSX = require("xlsx");
+const request = require('./utils/axios_requests')
 
-const Turistas = require('./sheets/turistes');
-const Ocupacio = require('./sheets/ocupacio');
-const Aeri = require('./sheets/aeri');
-const Maritim = require('./sheets/maritim');
+
+const Tourists = require('./sheets/tourists');
+const Occupancy = require('./sheets/occupancy');
+const AirPassengers = require('./sheets/air_passengers');
+const SeaPassengers = require('./sheets/sea_passengers');
 const Ambiental = require('./sheets/ambiental');
 const Social = require('./sheets/social');
+const sections=require('./json/sheets_json').sections;
 
-const excelToJson = (inputFile, month) => {
+const excelToJson = (inputFile, month, baseUrl) => {
     const excel = XLSX.readFile(inputFile);
     var sheetNames = excel.SheetNames;
-    const sections=['TURISTES-DESPESA', 'OCUPACIÓ', 'AERI', 'MARÍTIM', 'AMBIENTAL', 'SOCIAL']
     sheetNames.forEach (sheet => {
         switch (sheet) {
             case sections[0]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                // Turistas.arribadaDeTuristes(datos, month);
-                // Turistas.arribadaDeTuristesAcc(datos, month);
-                // Turistas.despesaDelsTuristes(datos, month);
-                // Turistas.despesaDelsTuristesAcc(datos, month);
-                // Turistas.despesaDelsTuristesTotal(datos, month);
-                // Turistas.despesaDelsTuristesTotalAcc(datos, month);
-                // Turistas.pernoctacions(datos, month);
-                // Turistas.pernoctacionsPerIlla(datos, month);
-                // Turistas.pernoctacionsAcc(datos, month);
-                // Turistas.pernoctacionsPerIllaAcc(datos, month);
+                request.makePost(baseUrl, Tourists.touristArrivals(datos, month)); 
+                request.makePost(baseUrl, Tourists.touristArrivalsAcc(datos, month));
+                request.makePost(baseUrl, Tourists.spending(datos, month));
+                request.makePost(baseUrl, Tourists.spendingAcc(datos, month));
+                request.makePost(baseUrl, Tourists.spendingTotal(datos, month));
+                request.makePost(baseUrl, Tourists.spendingTotalAcc(datos, month));
+                request.makePost(baseUrl, Tourists.spendingStays(datos, month));
+                request.makePost(baseUrl, Tourists.spendingStaysIslands(datos, month));
+                request.makePost(baseUrl, Tourists.spendingStaysAcc(datos, month));
+                request.makePost(baseUrl, Tourists.spendingStaysIslandsAcc(datos, month));
                 break;
             case sections[1]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                // Ocupacio.ocupacioPerPlacesObertes(datos, month);
-                // Ocupacio.ocupacioPerPlacesObertesAcc(datos, month);
+                request.makePost(baseUrl, Occupancy.occupancy(datos, month));
+                request.makePost(baseUrl, Occupancy.occupancyAcc(datos, month));
                 break;
             case sections[2]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                // Aeri.air_passengers_arrivals(datos, month);
-                // Aeri.air_passengers_arrivals_acc(datos, month);
+                request.makePost(baseUrl, AirPassengers.air_passengers_arrivals(datos, month));
+                request.makePost(baseUrl, AirPassengers.air_passengers_arrivals_acc(datos, month));
                 break;
             case sections[3]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                // Maritim.cruisePassengersArrivalsAP(datos, month)
-                // Maritim.cruisePassengersArrivalsP(datos, month)
-                // Maritim.cruisePassengersArrivalsAccAP(datos, month)
-                // Maritim.cruisePassengersArrivalsAccP(datos, month)
-                // Maritim.seaPassengersArrivalsAP(datos, month)
-                // Maritim.seaPassengersArrivalsP(datos, month)
-                // Maritim.seaPassengersArrivalsAccAP(datos, month)
-                // Maritim.seaPassengersArrivalsAccP(datos, month)
+                request.makePost(baseUrl, SeaPassengers.cruisePassengersArrivalsAP(datos, month))
+                request.makePost(baseUrl, SeaPassengers.cruisePassengersArrivalsP(datos, month))
+                request.makePost(baseUrl, SeaPassengers.cruisePassengersArrivalsAccAP(datos, month))
+                request.makePost(baseUrl, SeaPassengers.cruisePassengersArrivalsAccP(datos, month))
+                request.makePost(baseUrl, SeaPassengers.seaPassengersArrivalsAP(datos, month))
+                request.makePost(baseUrl, SeaPassengers.seaPassengersArrivalsP(datos, month))
+                request.makePost(baseUrl, SeaPassengers.seaPassengersArrivalsAccAP(datos, month))
+                request.makePost(baseUrl, SeaPassengers.seaPassengersArrivalsAccP(datos, month))
                 break;
             case sections[4]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                // Ambiental.energy_demand(datos, month)
-                // Ambiental.human_pressure(datos, month)
+                request.makePost(baseUrl, Ambiental.energy_demand(datos, month))
+                request.makePost(baseUrl, Ambiental.human_pressure(datos, month))
                 break;
             case sections[5]:
                 console.log(sheet)
                 var datos = XLSX.utils.sheet_to_json(excel.Sheets[sheet]);
-                // Social.affiliates(datos, month);
-                // Social.unemployed(datos, month);
-                // Social.temporality(datos, month);
-                // Social.companies(datos, month);
+                request.makePost(baseUrl, Social.affiliates(datos, month));
+                request.makePost(baseUrl, Social.unemployed(datos, month));
+                request.makePost(baseUrl, Social.temporality(datos, month));
+                request.makePost(baseUrl, Social.companies(datos, month));
                 break;
             default:
-                console.log("Incorrect sheet");
                 break;
       }
-      
   })
 }
 
