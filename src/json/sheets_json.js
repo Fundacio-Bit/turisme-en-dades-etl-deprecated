@@ -195,11 +195,11 @@ const rows =
 
     human_pressure: { 
         section: 'ens_human_pressure', chart:'ens_human_pressure_total',
-        titleRow: {numRow: 0, key: null, value: 1},
-        columnRow: {numRow: 1, initValue: 0, numColumns: 2 },
-        rows: { firstRow: {initRow: 2, initValue: 10, hasHeader: true },
-                initRow: 3, initValue: 0, numRows: 2, hasHeader: true },
-        footerRow: 5
+        titleRow: {numRow: 3, key: null, value: 0},
+        columnRow: {numRow: 4, initValue: 1, numColumns: 2 },
+        rows: { firstRow: {initRow: 5, initValue: 1, hasHeader: true },
+                initRow: 6, initValue: 0, numRows: 2, hasHeader: true },
+        footerRow: 16
     },
 
     // SOCIAL
