@@ -21,58 +21,58 @@ const rows =
     
     spending: { 
         section: 'ecs_spending', chart:'ecs_spending_countries_total',
-        titleRow: {numRow: 29, key: null, value: 0}, 
-        columnRow: {numRow: 30, initValue: 0, numColumns: 8 },
-        rows: {initRow: 31, initValue: 0, numRows: 11, hasHeader: true },
-        footerRow: 42 },
+        titleRow: {numRow: 28, key: null, value: 0}, 
+        columnRow: {numRow: 29, initValue: 0, numColumns: 8 },
+        rows: {initRow: 30, initValue: 0, numRows: 11, hasHeader: true },
+        footerRow: 41 },
     
     spending_acc: { 
         section: 'ecs_spending', chart:'ecs_spending_countries_cumulative',
-        titleRow: {numRow: 43, key: null, value: 0}, 
-        columnRow: {numRow: 44, initValue: 0, numColumns: 8 },
-        rows: {initRow: 45, initValue: 0, numRows: 11, hasHeader: true },
-        footerRow: 56 },
+        titleRow: {numRow: 42, key: null, value: 0}, 
+        columnRow: {numRow: 43, initValue: 0, numColumns: 8 },
+        rows: {initRow: 44, initValue: 0, numRows: 11, hasHeader: true },
+        footerRow: 55 },
     
     spending_total: { 
         section: 'ecs_spending', chart:'ecs_spending_islands_total',
-        titleRow: {numRow: 57, key: null, value: 0}, 
-        columnRow: {numRow: 1, initValue: 0, numColumns: 8 },
-        rows: {initRow: 59, initValue: 0, numRows: 5, hasHeader: true },
-        footerRow: 64 },
+        titleRow: {numRow: 56, key: null, value: 0}, 
+        columnRow: {numRow: 57, initValue: 0, numColumns: 8 },
+        rows: {initRow: 58, initValue: 0, numRows: 5, hasHeader: true },
+        footerRow: 63 },
     
     spending_total_acc: { 
         section: 'ecs_spending', chart:'ecs_spending_islands_cumulative',
-        titleRow: {numRow: 65, key: null, value: 0}, 
-        columnRow: {numRow: 1, initValue: 0, numColumns: 8 },
-        rows: {initRow: 67, initValue: 0, numRows: 5, hasHeader: true },
-        footerRow: 72 },
+        titleRow: {numRow: 64, key: null, value: 0}, 
+        columnRow: {numRow: 65, initValue: 0, numColumns: 8 },
+        rows: {initRow: 66, initValue: 0, numRows: 5, hasHeader: true },
+        footerRow: 71 },
     
     spending_stays: { 
         section: 'ecs_spending', chart:'ecs_spending_stays_countries_total',
-        titleRow: {numRow: 73, key: null, value: 0}, 
-        columnRow: {numRow: 74, initValue: 0, numColumns: 4 },
-        rows: {initRow: 75, initValue: 0, numRows: 6, hasHeader: true },
+        titleRow: {numRow: 72, key: null, value: 0}, 
+        columnRow: {numRow: 73, initValue: 0, numColumns: 4 },
+        rows: {initRow: 74, initValue: 0, numRows: 6, hasHeader: true },
         footerRow: null },
     
     spending_stays_acc: { 
         section: 'ecs_spending', chart:'ecs_spending_stays_countries_cumulative',
-        titleRow: {numRow: 81, key: null, value: 0}, 
-        columnRow: {numRow: 74, initValue: 0, numColumns: 4 },
-        rows: {initRow: 83, initValue: 0, numRows: 6, hasHeader: true },
+        titleRow: {numRow: 80, key: null, value: 0}, 
+        columnRow: {numRow: 81, initValue: 0, numColumns: 4 },
+        rows: {initRow: 82, initValue: 0, numRows: 6, hasHeader: true },
         footerRow: null },
     
     spending_stays_islands: { 
         section: 'ecs_spending', chart:'ecs_spending_stays_islands_total',
-        titleRow: {numRow: 89, key: null, value: 0}, 
-        columnRow: {numRow: 90, initValue: 0, numColumns: 4 },
-        rows: {initRow: 91, initValue: 0, numRows: 4, hasHeader: true },
+        titleRow: {numRow: 88, key: null, value: 0}, 
+        columnRow: {numRow: 89, initValue: 0, numColumns: 4 },
+        rows: {initRow: 90, initValue: 0, numRows: 4, hasHeader: true },
         footerRow: null },
     
     spending_stays_islands_acc: { 
         section: 'ecs_spending', chart:'ecs_spending_stays_islands_cumulative',
-        titleRow: {numRow: 95, key: null, value: 0},
-        columnRow: {numRow: 96, initValue: 0, numColumns: 4 },
-        rows: {initRow: 97, initValue: 0, numRows: 4, hasHeader: true },
+        titleRow: {numRow: 94, key: null, value: 0},
+        columnRow: {numRow: 95, initValue: 0, numColumns: 4 },
+        rows: {initRow: 96, initValue: 0, numRows: 4, hasHeader: true },
         footerRow: null },
     
     // OCUPACIO
@@ -213,19 +213,19 @@ const rows =
 
     unemployed: { 
         section: 'sos_unemployed', chart:'sos_unemployed',
-        titleRow: {numRow: 7, key: null, value: 0},
-        subTitleRow: {numRow: 7, key: null, value: 1, separator: '/'},
-        columnRow: {numRow: 8, initValue: 0, numColumns: 2 },
-        rows: {initRow: 9, initValue: 0, numRows: 1, hasHeader: true },
+        titleRow: {numRow: 3, key: null, value: 0},
+        subTitleRow: {numRow: 3, key: null, value: 1, separator: '/'},
+        columnRow: {numRow: 4, initValue: 0, numColumns: 2 },
+        rows: {initRow: 5, initValue: 0, numRows: 1, hasHeader: true },
         footerRow: null },
 
     temporality: {
         section: 'sos_temporality', chart:'sos_temporality',
-        titleRow: {numRow: 12, key: null, value: 0},
-        subTitleRow: {numRow: 12, key: null, value: 1, separator: '/'}, 
-        columnRow: {numRow: 13, initValue: 0, numColumns: 2 },
-        rows: {initRow: 14, initValue: 0, numRows: 1, hasHeader: true },
-        footerRow: 15 },
+        titleRow: {numRow: 6, key: null, value: 0},
+        subTitleRow: {numRow: 6, key: null, value: 1, separator: '/'}, 
+        columnRow: {numRow: 7, initValue: 0, numColumns: 2 },
+        rows: {initRow: 8, initValue: 0, numRows: 1, hasHeader: true },
+        footerRow: 9 },
 
     companies: { 
         section: 'sos_companies', chart:'sos_companies',
