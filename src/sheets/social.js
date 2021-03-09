@@ -7,13 +7,13 @@ const affiliates = (data, month) => {
 }
   
 const unemployed = (data, month) => {
-    const { section, chart, titleRow, columnRow, footerRow, rows } = table.rows['unemployed']
-    return generate_json.generateDataGrid(data, month, section, chart, titleRow, null, columnRow, footerRow, rows);
+    const { section, chart, titleRow, subTitleRow, columnRow, footerRow, rows } = table.rows['unemployed']
+    return generate_json.generateDataGrid(data, month, section, chart, titleRow, subTitleRow, columnRow, footerRow, rows);
 }
 
 const temporality = (data, month) => {
-    const { section, chart, titleRow, columnRow, footerRow, rows } = table.rows['temporality']
-    return generate_json.generateDataGrid(data, month, section, chart, titleRow, null, columnRow, footerRow, rows);
+    const { section, chart, titleRow, subTitleRow, columnRow, footerRow, rows } = table.rows['temporality']
+    return generate_json.generateDataGrid(data, month, section, chart, titleRow, subTitleRow, columnRow, footerRow, rows);
 }
 
 const companies = (data, month) => {

@@ -14,10 +14,10 @@ const rows =
 
     tourist_arrivals_acc: { 
         section: 'ecs_tourist_arrivals', chart:'ecs_tourist_arrivals_cumulative', 
-        titleRow: {numRow: 15, key: null, value: 0},
-        columnRow: {numRow: 1, initValue: 0, numColumns: 8 },
-        rows: {initRow: 17, initValue: 0, numRows: 11, hasHeader: true },
-        footerRow: 28 },
+        titleRow: {numRow: 14, key: null, value: 0},
+        columnRow: {numRow: 15, initValue: 0, numColumns: 8 },
+        rows: {initRow: 16, initValue: 0, numRows: 11, hasHeader: true },
+        footerRow: 27 },
     
     spending: { 
         section: 'ecs_spending', chart:'ecs_spending_countries_total',
@@ -193,12 +193,44 @@ const rows =
         footerRow: null
     },
 
-    human_pressure: { 
+    human_pressure_ib: { 
         section: 'ens_human_pressure', chart:'ens_human_pressure_total',
         titleRow: {numRow: 3, key: null, value: 0},
         columnRow: {numRow: 4, initValue: 1, numColumns: 2 },
         rows: { firstRow: {initRow: 5, initValue: 1, hasHeader: true },
                 initRow: 6, initValue: 0, numRows: 2, hasHeader: true },
+        footerRow: 16
+    },
+
+    human_pressure_mallorca: { 
+        section: 'ens_human_pressure', chart:'ens_human_pressure_total',
+        titleRow: {numRow: 3, key: null, value: 0},
+        columnRow: {numRow: 8, initValue: 1, numColumns: 2 },
+        rows: { initRow: 9, initValue: 0, numRows: 2, hasHeader: true },
+        footerRow: 16
+    },
+
+    human_pressure_menorca: { 
+        section: 'ens_human_pressure', chart:'ens_human_pressure_total',
+        titleRow: {numRow: 3, key: null, value: 0},
+        columnRow: {numRow: 10, initValue: 1, numColumns: 2 },
+        rows: { initRow: 11, initValue: 0, numRows: 2, hasHeader: true },
+        footerRow: 16
+    },
+
+    human_pressure_ibiza: { 
+        section: 'ens_human_pressure', chart:'ens_human_pressure_total',
+        titleRow: {numRow: 3, key: null, value: 0},
+        columnRow: {numRow: 12, initValue: 1, numColumns: 2 },
+        rows: { initRow: 13, initValue: 0, numRows: 2, hasHeader: true },
+        footerRow: 16
+    },
+
+    human_pressure_formentera: { 
+        section: 'ens_human_pressure', chart:'ens_human_pressure_total',
+        titleRow: {numRow: 3, key: null, value: 0},
+        columnRow: {numRow: 14, initValue: 1, numColumns: 2 },
+        rows: { initRow: 15, initValue: 0, numRows: 2, hasHeader: true },
         footerRow: 16
     },
 
