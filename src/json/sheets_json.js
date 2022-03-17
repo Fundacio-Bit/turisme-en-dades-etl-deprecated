@@ -14,10 +14,10 @@ const rows =
 
     tourist_arrivals_acc: { 
         section: 'ecs_tourist_arrivals', chart:'ecs_tourist_arrivals_cumulative', 
-        titleRow: {numRow: 15, key: null, value: 0},
-        columnRow: {numRow: 1, initValue: 0, numColumns: 8 },
-        rows: {initRow: 17, initValue: 0, numRows: 11, hasHeader: true },
-        footerRow: 28 },
+        titleRow: {numRow: 14, key: null, value: 0},
+        columnRow: {numRow: 15, initValue: 0, numColumns: 8 },
+        rows: {initRow: 16, initValue: 0, numRows: 11, hasHeader: true },
+        footerRow: 27 },
     
     spending: { 
         section: 'ecs_spending', chart:'ecs_spending_countries_total',
@@ -221,11 +221,11 @@ const rows =
 
     temporality: {
         section: 'sos_temporality', chart:'sos_temporality',
-        titleRow: {numRow: 12, key: null, value: 0},
-        subTitleRow: {numRow: 12, key: null, value: 1, separator: '/'}, 
-        columnRow: {numRow: 13, initValue: 0, numColumns: 2 },
-        rows: {initRow: 14, initValue: 0, numRows: 1, hasHeader: true },
-        footerRow: 15 },
+        titleRow: {numRow: 11, key: null, value: 0},
+        subTitleRow: {numRow: 11, key: null, value: 1, separator: '/'}, 
+        columnRow: {numRow: 12, initValue: 0, numColumns: 2 },
+        rows: {initRow: 13, initValue: 0, numRows: 1, hasHeader: true },
+        footerRow: 14 },
 
     companies: { 
         section: 'sos_companies', chart:'sos_companies',

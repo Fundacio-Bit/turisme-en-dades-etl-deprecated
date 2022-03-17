@@ -7,12 +7,12 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Iniciar el programa",
+            "name": "ExcelToJson",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\main.js",
-            "args": ["--month=2020-12", "--file=2012 CMIT PLANTILLA.xls"]
+            "args": ["--month=2022-01", "--file=2201 CMIT PLANTILLA.xls"]
         }
     ]
 }
